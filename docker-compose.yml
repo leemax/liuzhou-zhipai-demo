@@ -27,3 +27,6 @@ services:
     depends_on: [server]
     ports:
       - "3000:80"
+
+volumes:
+  pgdata:
