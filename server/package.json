@@ -1,0 +1,11 @@
+{
+  "name": "zhipai-api",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.19.0",
+    "pg": "^8.11.3",
+    "redis": "^4.6.7"
+  }
+}
+

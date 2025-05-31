@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: zhipai
+      POSTGRES_PASSWORD: zhipai
+      POSTGRES_DB: zhipai
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+  server:
+    build: ./server                # 看下方 Dockerfile
+    environment:
+      DATABASE_URL: postgres://zhipai:zhipai@postgres:5432/zhipai
+      REDIS_URL: redis://redis:6379
+    depends_on: [postgres, redis]
+    ports: ["4000:4000"]
+
+  client:
+    build: ./client                # 见下面 Dockerfile
+    depends_on: [server]
+    ports: ["3000:80"]
+
+volumes:
+  pgdata:
