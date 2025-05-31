@@ -1,7 +1,14 @@
 services:
   postgres:
     image: postgres:16-alpine
-    # ...
+    environment:
+      POSTGRES_USER: zhipai               # ← 可省略，默认是 postgres
+      POSTGRES_PASSWORD: zhipai           # ← 必须！随便改一串安全密码
+      POSTGRES_DB: zhipai                 # ← 可选，自动建一个业务库
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
   redis:
     image: redis:7-alpine
