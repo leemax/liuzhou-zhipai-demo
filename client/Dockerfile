@@ -1,4 +1,4 @@
-FROM nginx:stable-alpine
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY index.html /usr/share/nginx/html/index.html
-EXPOSE 80
+# build 阶段 COPY 位置
+COPY client-vite/package.json client-vite/pnpm-lock.yaml* ./
+COPY client-vite .
+RUN pnpm run build
