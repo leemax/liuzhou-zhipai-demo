@@ -5,18 +5,20 @@ const CARD_W = 60;
 const CARD_H = 90;
 
 export default function Desk() {
-  const divRef = useRef<HTMLDivElement>(null);
+  const hostRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!divRef.current) return;
+    if (!hostRef.current) return;
 
-    // v7 直接 new Application
+    // ✅ v7 经典写法：同步 new
     const app = new PIXI.Application({
-      resizeTo: divRef.current,
+      resizeTo: hostRef.current,
       background: 0x2a8c55,
       antialias: true,
     });
-    divRef.current.appendChild(app.view);      // v7 用 view
+
+    // ✅ v7 有 app.view
+    hostRef.current.appendChild(app.view);
 
     // 画 21 张占位牌
     for (let i = 0; i < 21; i++) {
@@ -35,5 +37,5 @@ export default function Desk() {
     return () => app.destroy(true);
   }, []);
 
-  return <div ref={divRef} style={{ flex: 1 }} />;
+  return <div ref={hostRef} style={{ flex: 1 }} />;
 }
