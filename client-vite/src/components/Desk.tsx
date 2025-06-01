@@ -18,7 +18,7 @@ export default function Desk() {
     });
 
     // ✅ v7 有 app.view
-    hostRef.current.appendChild(app.view);
+      hostRef.current!.appendChild(app.view as unknown as HTMLCanvasElement);
 
     // 画 21 张占位牌
     for (let i = 0; i < 21; i++) {
